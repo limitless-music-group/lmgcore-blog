@@ -1,10 +1,10 @@
-import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { fonts } from "@/packages/ui/lib/fonts";
 import { Providers } from "./providers";
+import "./globals.css";
 
 export default function RootLayout({
   children,

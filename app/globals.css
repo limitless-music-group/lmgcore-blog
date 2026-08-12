@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@/packages/ui/styles/globals.css";
+@import "../packages/ui/styles/globals.css";
 
 /* 
 :root {
