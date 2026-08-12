@@ -1,11 +1,50 @@
 {
-    "extends": "",
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Default",
     "compilerOptions": {
+        "allowImportingTsExtensions": true,
+        "allowJs": true,
+        "declaration": true,
+        "declarationMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "incremental": false,
+        "isolatedModules": true,
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "jsx": "preserve",
+        "module": "ESNext",
+        "moduleDetection": "force",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "plugins": [
+          {
+            "name": "@effect/language-service"
+          },
+          {
+            "name": "next"
+          }
+        ],
         "paths": {
-          "@/*": ["./*"],
-          "@packages/*": ["../../packages/*"]
-        }
-      },
-    "include": ["**/*.ts", "**/*.tsx", "**/*.test.ts", "**/*.test.ts"],
+          "@/*": ["./*"]        
+        },
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "ESNext",
+        "types": ["node"],
+        "verbatimModuleSyntax": true
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts", 
+        "**/*.tsx", 
+        "**/*.test.ts", 
+        "**/*.test.ts"
+    ],
     "exclude": ["node_modules", ".next"]
 }
