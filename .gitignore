@@ -413,7 +413,6 @@ build
 *.tsbuildinfo
 
 # Environment variables
-.env
 .env*.local
 
 # IDEs and editors
@@ -471,7 +470,6 @@ pnpm-debug.log*
 
 
 # environment variables
-.env
 .env.production
 
 # macOS-specific files
@@ -565,7 +563,6 @@ web-build/
 # UniWind generated types
 uniwind-types.d.ts
 
-.env*
 
 # Playwright
 apps/web/e2e/test-results/
