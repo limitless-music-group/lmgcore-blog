@@ -4,8 +4,8 @@
 import { layer as nodeSdkLayer } from "@effect/opentelemetry/NodeSdk";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
-import { keys } from "./keys";
 import { tracesEndpoint } from "./traces-endpoint";
+import { env } from "@/env";
 
 /**
  * Exports every `Effect.withSpan` call in this codebase to Better Stack
@@ -27,7 +27,6 @@ import { tracesEndpoint } from "./traces-endpoint";
  * rather than per-request.
  */
 export const BetterStackTelemetryLayer = nodeSdkLayer(() => {
-  const env = keys();
   return {
     resource: { serviceName: process.env.SERVICE_NAME ?? "lmgcore" },
     spanProcessor: new BatchSpanProcessor(

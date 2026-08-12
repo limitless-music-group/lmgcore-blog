@@ -1,13 +1,13 @@
 import { Effect, pipe } from "effect";
-import { keys } from "../../keys";
 import { PostHogClientProvider } from "../provider/posthog-client.provider";
+import { env } from "@/env";
 
 export const initClientAnalytics = () =>
   pipe(
     PostHogClientProvider,
     Effect.flatMap((posthog) =>
       Effect.sync(() => {
-        const { NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST } = keys();
+        const { NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST } = env;
 
         if (!(NEXT_PUBLIC_POSTHOG_KEY && NEXT_PUBLIC_POSTHOG_HOST)) {
           return;

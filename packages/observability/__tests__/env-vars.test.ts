@@ -1,6 +1,6 @@
 import { afterEach, assert, describe, it, vi } from "@effect/vitest";
-import { keys } from "../keys";
 import { stubObservabilityEnv } from "./support/stub-observability-env";
+import { env } from "@/env";
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -9,7 +9,6 @@ afterEach(() => {
 describe("loadObservabilityServerEnv", () => {
   it("resolves every required var, unwrapping the redacted key", () => {
     stubObservabilityEnv();
-    const env = keys();
 
     assert.strictEqual(env.BETTER_STACK_API_KEY, "bts_test_123");
     assert.strictEqual(env.BETTER_STACK_URL, "in-otel.logs.betterstack.com");
@@ -27,7 +26,7 @@ describe("loadObservabilityServerEnv", () => {
     vi.stubEnv("BETTER_STACK_URL", undefined);
     vi.stubEnv("SENTRY_ORG", undefined);
     vi.stubEnv("SENTRY_PROJECT", undefined);
-    assert.throws(() => keys());
+    assert.throws(() => env);
   });
 });
 
@@ -49,7 +48,6 @@ describe("loadObservabilityClientEnv", () => {
     stubObservabilityEnv();
     vi.resetModules();
 
-    const env = keys();
 
     assert.strictEqual(
       env.NEXT_PUBLIC_SENTRY_DSN,
@@ -71,6 +69,6 @@ describe("loadObservabilityClientEnv", () => {
     vi.stubEnv("NEXT_PUBLIC_SENTRY_DSN", undefined);
     vi.resetModules();
 
-    assert.throws(() => keys());
+    assert.throws(() => env);
   });
 });

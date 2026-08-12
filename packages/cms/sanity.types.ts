@@ -15,196 +15,50 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
-export interface SanityImageAssetReference {
+export type Tag = {
+  _id: string;
+  _type: "tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  description?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
+export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-}
+};
 
-export interface Testimonial {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "testimonial";
-  _updatedAt: string;
-  authorName: string;
-  authorRole?: string;
-  avatar?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  order: number;
-  organizationName?: string;
-  quote: string;
-  source?: string;
-  submittedAt?: string;
-}
-
-export interface SanityImageCrop {
-  _type: "sanity.imageCrop";
-  bottom: number;
-  left: number;
-  right: number;
-  top: number;
-}
-
-export interface SanityImageHotspot {
-  _type: "sanity.imageHotspot";
-  height: number;
-  width: number;
-  x: number;
-  y: number;
-}
-
-export interface Team {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "team";
-  _updatedAt: string;
-  image: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  name: string;
-  order: number;
-  role: string;
-  socials?: {
-    website?: string;
-    linkedin?: string;
-  };
-}
-
-export interface Faq {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "faq";
-  _updatedAt: string;
-  answer: string;
-  order: number;
-  question: string;
-}
-
-export interface Release {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "release";
-  _updatedAt: string;
-  date: string;
-  groups: Array<{
-    type: "Added" | "Improved" | "Fixed";
-    items: string[];
-    _type: "changeGroup";
-    _key: string;
-  }>;
-  summary: string;
-  version: string;
-}
-
-export interface TagReference {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "tag";
-}
-
-export interface RoadmapItem {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "roadmapItem";
-  _updatedAt: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: string[];
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  description: string;
-  featured?: boolean;
-  priority?: number;
-  shippedAt?: string;
-  slug: Slug;
-  status: "planned" | "in-progress" | "shipped";
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
-  targetDate?: string;
-  title: string;
-}
-
-export interface Slug {
-  _type: "slug";
-  current: string;
-  source?: string;
-}
-
-export interface Tag {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "tag";
-  _updatedAt: string;
-  description?: string;
-  slug: Slug;
-  title: string;
-}
-
-export interface AuthorReference {
+export type AuthorReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "author";
-}
+};
 
-export interface Post {
-  _createdAt: string;
+export type TagReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "tag";
+};
+
+export type Post = {
   _id: string;
-  _rev: string;
   _type: "post";
+  _createdAt: string;
   _updatedAt: string;
-  author: AuthorReference;
-  body: Array<{
-    children?: Array<{
-      marks?: string[];
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  _rev: string;
   image: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -212,25 +66,18 @@ export interface Post {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  publishedAt: string;
-  slug: Slug;
+  author: AuthorReference;
   tags: Array<
     {
       _key: string;
     } & TagReference
   >;
+  publishedAt: string;
   title: string;
-}
-
-export interface Author {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "author";
-  _updatedAt: string;
-  bio: Array<{
+  slug: Slug;
+  body: Array<{
     children?: Array<{
-      marks?: string[];
+      marks?: Array<string>;
       text?: string;
       _type: "span";
       _key: string;
@@ -246,6 +93,16 @@ export interface Author {
     _type: "block";
     _key: string;
   }>;
+};
+
+export type Author = {
+  _id: string;
+  _type: "author";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  slug: Slug;
   image: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -253,122 +110,149 @@ export interface Author {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  name: string;
-  slug: Slug;
-}
+  bio: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
 
-export interface SanityImagePaletteSwatch {
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
   foreground?: string;
   population?: number;
   title?: string;
-}
+};
 
-export interface SanityImagePalette {
+export type SanityImagePalette = {
   _type: "sanity.imagePalette";
   darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
   dominant?: SanityImagePaletteSwatch;
   lightMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
   muted?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-}
+};
 
-export interface SanityImageDimensions {
+export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  aspectRatio: number;
   height: number;
   width: number;
-}
+  aspectRatio: number;
+};
 
-export interface SanityImageMetadata {
+export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";
-  blurHash?: string;
+  location?: Geopoint;
   dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-  location?: Geopoint;
-  lqip?: string;
-  palette?: SanityImagePalette;
-  thumbHash?: string;
-}
+};
 
-export interface SanityFileAsset {
-  _createdAt: string;
+export type SanityFileAsset = {
   _id: string;
-  _rev: string;
   _type: "sanity.fileAsset";
-  _updatedAt: string;
-  altText?: string;
-  assetId: string;
-  description?: string;
-  extension: string;
-  label?: string;
-  mimeType: string;
-  originalFilename?: string;
-  path: string;
-  sha1hash: string;
-  size: number;
-  source?: SanityAssetSourceData;
-  title?: string;
-  uploadId?: string;
-  url: string;
-}
-
-export interface SanityAssetSourceData {
-  _type: "sanity.assetSourceData";
-  id?: string;
-  name?: string;
-  url?: string;
-}
-
-export interface SanityImageAsset {
   _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "sanity.imageAsset";
   _updatedAt: string;
-  altText?: string;
-  assetId: string;
-  description?: string;
-  extension: string;
-  label?: string;
-  metadata?: SanityImageMetadata;
-  mimeType: string;
+  _rev: string;
   originalFilename?: string;
-  path: string;
-  sha1hash: string;
-  size: number;
-  source?: SanityAssetSourceData;
+  label?: string;
   title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash: string;
+  extension: string;
+  mimeType: string;
+  size: number;
+  assetId: string;
   uploadId?: string;
+  path: string;
   url: string;
-}
+  source?: SanityAssetSourceData;
+};
 
-export interface Geopoint {
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash: string;
+  extension: string;
+  mimeType: string;
+  size: number;
+  assetId: string;
+  uploadId?: string;
+  path: string;
+  url: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type Geopoint = {
   _type: "geopoint";
-  alt?: number;
   lat?: number;
   lng?: number;
-}
+  alt?: number;
+};
 
 export type AllSanitySchemaTypes =
-  | SanityImageAssetReference
-  | Testimonial
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Team
-  | Faq
-  | Release
-  | TagReference
-  | RoadmapItem
-  | Slug
   | Tag
+  | Slug
+  | SanityImageAssetReference
   | AuthorReference
+  | TagReference
   | Post
   | Author
+  | SanityImageCrop
+  | SanityImageHotspot
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -378,7 +262,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: queries/author.ts
+// Source: packages/cms/queries/author.ts
 // Variable: AUTHOR_QUERY
 // Query: *[  _type == "author"  && slug.current == $slug][0]{  _id,  name,  slug,  image,  bio,  "posts": *[    _type == "post"    && references(^._id)    && defined(slug.current)  ]|order(publishedAt desc){    _id,    title,    slug,    publishedAt,    image  }}
 export type AUTHOR_QUERY_RESULT = {
@@ -394,7 +278,7 @@ export type AUTHOR_QUERY_RESULT = {
   };
   bio: Array<{
     children?: Array<{
-      marks?: string[];
+      marks?: Array<string>;
       text?: string;
       _type: "span";
       _key: string;
@@ -425,14 +309,14 @@ export type AUTHOR_QUERY_RESULT = {
   }>;
 } | null;
 
-// Source: queries/author.ts
+// Source: packages/cms/queries/author.ts
 // Variable: AUTHOR_SLUGS_QUERY
 // Query: *[_type == "author" && defined(slug.current)]{"slug": slug.current}
 export type AUTHOR_SLUGS_QUERY_RESULT = Array<{
   slug: string;
 }>;
 
-// Source: queries/author.ts
+// Source: packages/cms/queries/author.ts
 // Variable: AUTHORS_QUERY
 // Query: *[  _type == "author"  && defined(slug.current)]|order(name asc){  _id,  name,  slug,  image,  "posts": *[    _type == "post"    && references(^._id)    && defined(slug.current)  ]|order(publishedAt desc){    _id,    title,    slug,    publishedAt  }}
 export type AUTHORS_QUERY_RESULT = Array<{
@@ -454,44 +338,7 @@ export type AUTHORS_QUERY_RESULT = Array<{
   }>;
 }>;
 
-// Source: queries/changelog.ts
-// Variable: CHANGELOGS_QUERY
-// Query: *[  _type == "release"]|order(date desc){  _id,  version,  date,  summary,  groups[]{ type, items }}
-export type CHANGELOGS_QUERY_RESULT = Array<{
-  _id: string;
-  version: string;
-  date: string;
-  summary: string;
-  groups: Array<{
-    type: "Added" | "Fixed" | "Improved";
-    items: string[];
-  }>;
-}>;
-
-// Source: queries/changelog.ts
-// Variable: CHANGELOG_QUERY
-// Query: *[  _type == "release"  && version == $version][0]{  _id,  version,  date,  summary,  groups[]{ type, items }}
-export type CHANGELOG_QUERY_RESULT = {
-  _id: string;
-  version: string;
-  date: string;
-  summary: string;
-  groups: Array<{
-    type: "Added" | "Fixed" | "Improved";
-    items: string[];
-  }>;
-} | null;
-
-// Source: queries/faq.ts
-// Variable: FAQS_QUERY
-// Query: *[  _type == "faq"]|order(order desc){  _id,  question,  answer}
-export type FAQS_QUERY_RESULT = Array<{
-  _id: string;
-  question: string;
-  answer: string;
-}>;
-
-// Source: queries/post.ts
+// Source: packages/cms/queries/post.ts
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{  ...,  author->{name, slug, image},  tags[]->{_id, title, slug}}
 export type POST_QUERY_RESULT = {
@@ -528,7 +375,7 @@ export type POST_QUERY_RESULT = {
   slug: Slug;
   body: Array<{
     children?: Array<{
-      marks?: string[];
+      marks?: Array<string>;
       text?: string;
       _type: "span";
       _key: string;
@@ -546,7 +393,7 @@ export type POST_QUERY_RESULT = {
   }>;
 } | null;
 
-// Source: queries/post.ts
+// Source: packages/cms/queries/post.ts
 // Variable: POSTS_QUERY
 // Query: *[ _type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, author->{name, slug, image}, tags[]->{_id, title, slug}}
 export type POSTS_QUERY_RESULT = Array<{
@@ -579,76 +426,14 @@ export type POSTS_QUERY_RESULT = Array<{
   }>;
 }>;
 
-// Source: queries/post.ts
+// Source: packages/cms/queries/post.ts
 // Variable: POST_SLUGS_QUERY
 // Query: *[_type == "post" && defined(slug.current)]{"slug": slug.current}
 export type POST_SLUGS_QUERY_RESULT = Array<{
   slug: string;
 }>;
 
-// Source: queries/roadmap.ts
-// Variable: ROADMAP_QUERY
-// Query: *[  _type == "roadmapItem"  && defined(slug.current)]|order(priority desc, targetDate asc){  _id,  title,  slug,  status,  description,  priority,  targetDate,  shippedAt,  featured,  tags[]->{ _id, title, slug }}
-export type ROADMAP_QUERY_RESULT = Array<{
-  _id: string;
-  title: string;
-  slug: Slug;
-  status: "in-progress" | "planned" | "shipped";
-  description: string;
-  priority: number | null;
-  targetDate: string | null;
-  shippedAt: string | null;
-  featured: boolean | null;
-  tags: Array<{
-    _id: string;
-    title: string;
-    slug: Slug;
-  }> | null;
-}>;
-
-// Source: queries/roadmap.ts
-// Variable: ROADMAP_ITEM_QUERY
-// Query: *[  _type == "roadmapItem"  && slug.current == $slug][0]{  ...,  tags[]->{ _id, title, slug }}
-export type ROADMAP_ITEM_QUERY_RESULT = {
-  _id: string;
-  _type: "roadmapItem";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  status: "in-progress" | "planned" | "shipped";
-  description: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: string[];
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  tags: Array<{
-    _id: string;
-    title: string;
-    slug: Slug;
-  }> | null;
-  priority?: number;
-  targetDate?: string;
-  shippedAt?: string;
-  featured?: boolean;
-} | null;
-
-// Source: queries/tag.ts
+// Source: packages/cms/queries/tag.ts
 // Variable: TAG_QUERY
 // Query: *[  _type == "tag"  && slug.current == $slug][0]{  _id,  title,  slug,  description,  "posts": *[    _type == "post"    && references(^._id)    && defined(slug.current)  ]|order(publishedAt desc){    _id,    title,    slug,    publishedAt,    image,    author->{name, slug, image}  }}
 export type TAG_QUERY_RESULT = {
@@ -682,14 +467,14 @@ export type TAG_QUERY_RESULT = {
   }>;
 } | null;
 
-// Source: queries/tag.ts
+// Source: packages/cms/queries/tag.ts
 // Variable: TAG_SLUGS_QUERY
 // Query: *[_type == "tag" && defined(slug.current)]{"slug": slug.current}
 export type TAG_SLUGS_QUERY_RESULT = Array<{
   slug: string;
 }>;
 
-// Source: queries/tag.ts
+// Source: packages/cms/queries/tag.ts
 // Variable: TAGS_QUERY
 // Query: *[  _type == "tag"  && defined(slug.current)]|order(title asc){  _id,  title,  slug,  description,  "postCount": count(*[_type == "post" && references(^._id)])}
 export type TAGS_QUERY_RESULT = Array<{
@@ -700,63 +485,18 @@ export type TAGS_QUERY_RESULT = Array<{
   postCount: number;
 }>;
 
-// Source: queries/team.ts
-// Variable: TEAMS_QUERY
-// Query: *[  _type == "team"]|order(order desc){  _id,  name,  role,  image,  socials}
-export type TEAMS_QUERY_RESULT = Array<{
-  _id: string;
-  name: string;
-  role: string;
-  image: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  socials: {
-    website?: string;
-    linkedin?: string;
-  } | null;
-}>;
-
-// Source: queries/testimonial.ts
-// Variable: TESTIMONIALS_QUERY
-// Query: *[  _type == "testimonial"]|order(order desc){  _id,  authorName,  authorRole,  quote,  avatar}
-export type TESTIMONIALS_QUERY_RESULT = Array<{
-  _id: string;
-  authorName: string;
-  authorRole: string | null;
-  quote: string;
-  avatar: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-}>;
-
 // Query TypeMap
 import "@sanity/client";
-
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[ _type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, author->{name, slug, image}, tags[]->{_id, title, slug}}': POSTS_QUERY_RESULT;
-    '*[_type == "author" && defined(slug.current)]{"slug": slug.current}': AUTHOR_SLUGS_QUERY_RESULT;
-    '*[_type == "post" && defined(slug.current)]{"slug": slug.current}': POST_SLUGS_QUERY_RESULT;
-    '*[_type == "post" && slug.current == $slug][0]{\n  ...,\n  author->{name, slug, image},\n  tags[]->{_id, title, slug}\n}': POST_QUERY_RESULT;
-    '*[_type == "tag" && defined(slug.current)]{"slug": slug.current}': TAG_SLUGS_QUERY_RESULT;
-    '*[\n  _type == "author"\n  && defined(slug.current)\n]|order(name asc){\n  _id,\n  name,\n  slug,\n  image,\n  "posts": *[\n    _type == "post"\n    && references(^._id)\n    && defined(slug.current)\n  ]|order(publishedAt desc){\n    _id,\n    title,\n    slug,\n    publishedAt\n  }\n}': AUTHORS_QUERY_RESULT;
     '*[\n  _type == "author"\n  && slug.current == $slug\n][0]{\n  _id,\n  name,\n  slug,\n  image,\n  bio,\n  "posts": *[\n    _type == "post"\n    && references(^._id)\n    && defined(slug.current)\n  ]|order(publishedAt desc){\n    _id,\n    title,\n    slug,\n    publishedAt,\n    image\n  }\n}': AUTHOR_QUERY_RESULT;
-    '*[\n  _type == "faq"\n]|order(order desc){\n  _id,\n  question,\n  answer\n}': FAQS_QUERY_RESULT;
-    '*[\n  _type == "release"\n  && version == $version\n][0]{\n  _id,\n  version,\n  date,\n  summary,\n  groups[]{ type, items }\n}': CHANGELOG_QUERY_RESULT;
-    '*[\n  _type == "release"\n]|order(date desc){\n  _id,\n  version,\n  date,\n  summary,\n  groups[]{ type, items }\n}': CHANGELOGS_QUERY_RESULT;
-    '*[\n  _type == "roadmapItem"\n  && defined(slug.current)\n]|order(priority desc, targetDate asc){\n  _id,\n  title,\n  slug,\n  status,\n  description,\n  priority,\n  targetDate,\n  shippedAt,\n  featured,\n  tags[]->{ _id, title, slug }\n}': ROADMAP_QUERY_RESULT;
-    '*[\n  _type == "roadmapItem"\n  && slug.current == $slug\n][0]{\n  ...,\n  tags[]->{ _id, title, slug }\n}': ROADMAP_ITEM_QUERY_RESULT;
-    '*[\n  _type == "tag"\n  && defined(slug.current)\n]|order(title asc){\n  _id,\n  title,\n  slug,\n  description,\n  "postCount": count(*[_type == "post" && references(^._id)])\n}': TAGS_QUERY_RESULT;
+    '*[_type == "author" && defined(slug.current)]{"slug": slug.current}': AUTHOR_SLUGS_QUERY_RESULT;
+    '*[\n  _type == "author"\n  && defined(slug.current)\n]|order(name asc){\n  _id,\n  name,\n  slug,\n  image,\n  "posts": *[\n    _type == "post"\n    && references(^._id)\n    && defined(slug.current)\n  ]|order(publishedAt desc){\n    _id,\n    title,\n    slug,\n    publishedAt\n  }\n}': AUTHORS_QUERY_RESULT;
+    '*[_type == "post" && slug.current == $slug][0]{\n  ...,\n  author->{name, slug, image},\n  tags[]->{_id, title, slug}\n}': POST_QUERY_RESULT;
+    '*[ _type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, author->{name, slug, image}, tags[]->{_id, title, slug}}': POSTS_QUERY_RESULT;
+    '*[_type == "post" && defined(slug.current)]{"slug": slug.current}': POST_SLUGS_QUERY_RESULT;
     '*[\n  _type == "tag"\n  && slug.current == $slug\n][0]{\n  _id,\n  title,\n  slug,\n  description,\n  "posts": *[\n    _type == "post"\n    && references(^._id)\n    && defined(slug.current)\n  ]|order(publishedAt desc){\n    _id,\n    title,\n    slug,\n    publishedAt,\n    image,\n    author->{name, slug, image}\n  }\n}': TAG_QUERY_RESULT;
-    '*[\n  _type == "team"\n]|order(order desc){\n  _id,\n  name,\n  role,\n  image,\n  socials\n}': TEAMS_QUERY_RESULT;
-    '*[\n  _type == "testimonial"\n]|order(order desc){\n  _id,\n  authorName,\n  authorRole,\n  quote,\n  avatar\n}': TESTIMONIALS_QUERY_RESULT;
+    '*[_type == "tag" && defined(slug.current)]{"slug": slug.current}': TAG_SLUGS_QUERY_RESULT;
+    '*[\n  _type == "tag"\n  && defined(slug.current)\n]|order(title asc){\n  _id,\n  title,\n  slug,\n  description,\n  "postCount": count(*[_type == "post" && references(^._id)])\n}': TAGS_QUERY_RESULT;
   }
 }

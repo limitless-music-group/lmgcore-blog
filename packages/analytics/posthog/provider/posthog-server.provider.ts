@@ -1,6 +1,6 @@
+import { env } from "@/env";
 import { Effect } from "effect";
 import { PostHog } from "posthog-node";
-import { keys } from "../../keys";
 
 /**
  * PostHog is an optional integration (unlike Stripe/WorkOS), so missing/blank
@@ -9,7 +9,7 @@ import { keys } from "../../keys";
  * `server.ts`.
  */
 export const PostHogServerProvider = Effect.sync(() => {
-  const { NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST } = keys();
+  const { NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST } = env;
 
   if (!(NEXT_PUBLIC_POSTHOG_KEY && NEXT_PUBLIC_POSTHOG_HOST)) {
     return;

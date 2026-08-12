@@ -1,7 +1,7 @@
 import { afterEach, assert, describe, it } from "@effect/vitest";
 import { vi } from "vitest";
-import { keys } from "../keys";
 import { stubAnalyticsEnv } from "./support/stub-analytics-env";
+import { env } from "@/env";
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -10,10 +10,10 @@ afterEach(() => {
 describe("loadAnalyticsServerEnv", () => {
   it("resolves every var, unwrapping the redacted values", () => {
     stubAnalyticsEnv();
-    const env = keys();
+    const appEnv = env;
 
-    assert.strictEqual(env.NEXT_PUBLIC_POSTHOG_KEY, "phc_test_123");
-    assert.strictEqual(env.NEXT_PUBLIC_POSTHOG_HOST, "https://posthog.test");
+    assert.strictEqual(appEnv.NEXT_PUBLIC_POSTHOG_KEY, "phc_test_123");
+    assert.strictEqual(appEnv.NEXT_PUBLIC_POSTHOG_HOST, "https://posthog.test");
   });
 
   it("throws when a required var is missing", () => {
@@ -22,7 +22,7 @@ describe("loadAnalyticsServerEnv", () => {
     // otherwise leak them in ambient here and silently stop testing anything.
     vi.stubEnv("NEXT_PUBLIC_POSTHOG_HOST", undefined);
     vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", undefined);
-    assert.throws(() => keys());
+    assert.throws(() => env);
   });
 });
 
@@ -42,11 +42,11 @@ describe("loadAnalyticsClientEnv", () => {
   it("resolves every required public var", () => {
     stubAnalyticsEnv();
     vi.resetModules();
-    const env = keys();
+    const appEnv = env;
 
-    assert.strictEqual(env.NEXT_PUBLIC_POSTHOG_KEY, "phc_test_123");
-    assert.strictEqual(env.NEXT_PUBLIC_POSTHOG_HOST, "https://posthog.test");
-    assert.strictEqual(env.NEXT_PUBLIC_GA_MEASUREMENT_ID, "G-TEST123");
+    assert.strictEqual(appEnv.NEXT_PUBLIC_POSTHOG_KEY, "phc_test_123");
+    assert.strictEqual(appEnv.NEXT_PUBLIC_POSTHOG_HOST, "https://posthog.test");
+    assert.strictEqual(appEnv.NEXT_PUBLIC_GA_MEASUREMENT_ID, "G-TEST123");
   });
 
   it("throws when a required var is missing", () => {
@@ -55,6 +55,6 @@ describe("loadAnalyticsClientEnv", () => {
     vi.stubEnv("NEXT_PUBLIC_POSTHOG_KEY", undefined);
     vi.resetModules();
 
-    assert.throws(() => keys());
+    assert.throws(() => env);
   });
 });

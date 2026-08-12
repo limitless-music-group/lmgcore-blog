@@ -1,7 +1,7 @@
 import { cacheLife } from "next/cache";
 import { ExternalAPIError } from "@/packages/shared/errors/external-api.error";
-import { keys } from "../keys";
 import type { BetterStackResponse } from "./types";
+import { env } from "@/env";
 /**
  * Server component only (secret API key + async) — never import from a
  * `"use client"` file. Render it in a server component and pass the element
@@ -20,12 +20,12 @@ export const Status = async () => {
   // Inside the component, not module scope: the loader throws when the env
   // is missing, and at module scope that crashes the whole importer at
   // bundle-evaluation time. Here it degrades to rendering nothing.
-  let env: ReturnType<typeof keys>;
-  try {
-    env = keys();
-  } catch {
-    return null;
-  }
+//   let env: ReturnType<typeof keys>;
+//   try {
+//     env = keys();
+//   } catch {
+//     return null;
+//   }
   const { BETTER_STACK_TEAM_API_KEY: apiKey, BETTER_STACK_URL: url } = env;
 
   let statusColor = "bg-gray-300";

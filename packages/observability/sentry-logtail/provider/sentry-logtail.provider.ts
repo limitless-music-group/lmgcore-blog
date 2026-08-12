@@ -1,5 +1,5 @@
+import { env } from "../../../../env";
 import { Effect } from "effect";
-import { keys } from "../../keys";
 
 /**
  * Unlike storage's R2 provider, there's no SDK client instance to construct
@@ -14,6 +14,6 @@ import { keys } from "../../keys";
  * is safe to call from any of the runtimes below (Node, edge, browser) —
  * keeping two names just preserves each call site's existing import.
  */
-export const ObservabilityServerConfig = Effect.sync(() => keys());
+export const ObservabilityServerConfig = Effect.sync(() => env);
 
-export const ObservabilityClientConfig = Effect.sync(() => keys());
+export const ObservabilityClientConfig = Effect.sync(() => env);

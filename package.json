@@ -1,18 +1,25 @@
 {
   "name": "lmgcore-blog",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:cms": "sanity build",
     "bump-deps": "bun x npm-check-updates --deep -u  && bun install",
     "check": "bun x ultracite check",
     "check-types": "tsc --noEmit --emitDeclarationOnly false",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
     "dev": "next dev -p 3002",
+    "dev:cms": "sanity dev",
     "doctor": "bun x react-doctor@latest",
+    "extract-schema": "sanity schema extract --enforce-required-fields --force",
     "fix": "bun x ultracite fix",
     "format:package-json": "syncpack format",
-    "start": "next start"
+    "start": "next start",
+    "start:cms": "sanity preview",
+    "typegen": "sanity schema extract --enforce-required-fields --force && sanity typegen generate"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
