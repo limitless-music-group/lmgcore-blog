@@ -1,0 +1,11 @@
+{
+    "extends": "",
+    "compilerOptions": {
+        "paths": {
+          "@/*": ["./*"],
+          "@packages/*": ["../../packages/*"]
+        }
+      },
+    "include": ["**/*.ts", "**/*.tsx", "**/*.test.ts", "**/*.test.ts"],
+    "exclude": ["node_modules", ".next"]
+}
