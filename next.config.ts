@@ -1,12 +1,13 @@
-// apps/app/next.config.ts
-
-import { config, withAnalyzer } from "@packages/next-config";
-import { withLogging, withSentry } from "@packages/observability/next-config";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import { env } from "@/env";
+import { withLogging, withSentry } from "@/packages/observability/next-config";
 
-let nextConfig: NextConfig = {
-  ...withLogging(withSentry(config)),
+const config: NextConfig = {
+  cacheComponents: true,
+  experimental: {
+    useTypeScriptCli: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -21,6 +22,34 @@ let nextConfig: NextConfig = {
       },
     ],
   },
+  partialPrefetching: true,
+
+  async rewrites() {
+    return [
+      {
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+        source: "/ingest/static/:path*",
+      },
+      {
+        destination: "https://us.i.posthog.com/:path*",
+        source: "/ingest/:path*",
+      },
+      {
+        destination: "https://us.i.posthog.com/decide",
+        source: "/ingest/decide",
+      },
+    ];
+  },
+
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true,
+};
+
+const withAnalyzer = (sourceConfig: NextConfig): NextConfig =>
+  withBundleAnalyzer()(sourceConfig);
+
+let nextConfig: NextConfig = {
+  ...withLogging(withSentry(config)),
 };
 
 if (env.ANALYZE === "true") {

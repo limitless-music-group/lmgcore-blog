@@ -1,103 +1,102 @@
 {
-    "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
-    "vcs": {
-      "enabled": false,
-      "clientKind": "git",
-      "useIgnoreFile": true
-    },
-    "files": {
-      "ignoreUnknown": false,
-      "includes": [
-        "!**/node_modules",
-        "!**/.next",
-        "!**/dist",
-        "!**/build",
-        "!**/.turbo",
-        "!**/.nx",
-        "!**/dev-dist",
-        "!**/.zed",
-        "!**/.vscode",
-        "!**/routeTree.gen.ts",
-        "!**/src-tauri",
-        "!**/.nuxt",
-        "!bts.jsonc",
-        "!**/.expo",
-        "!**/.wrangler",
-        "!**/.sanity",
-        "!**/.alchemy",
-        "!**/.svelte-kit",
-        "!**/wrangler.jsonc",
-        "!**/.source",
-        "!**/.react-email",
-        "!**/convex/_generated",
-        "!**/.github",
-        "!**/.agents",
-        "!**/.claude",
-        "!**/.repos"
-      ]
-    },
-    "extends": [
-      "ultracite/biome/core",
-      "ultracite/biome/react",
-      "ultracite/biome/next"
-    ],
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space"
-    },
-    "linter": {
-      "enabled": true,
-      "rules": {
-        "preset": "recommended",
-        "complexity": {
-          "noBannedTypes": "off"
-        },
-        "suspicious": {
-          "noUnnecessaryConditions": "off"
-        }
-      }
-    },
-    "overrides": [
-      {
-        "includes": ["**/*.astro"],
-        "linter": {
-          "rules": {
-            "correctness": {
-              "noUnusedVariables": "off"
-            }
-          }
-        }
+  "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/build",
+      "!**/.turbo",
+      "!**/.nx",
+      "!**/dev-dist",
+      "!**/.zed",
+      "!**/.vscode",
+      "!**/routeTree.gen.ts",
+      "!**/src-tauri",
+      "!**/.nuxt",
+      "!bts.jsonc",
+      "!**/.expo",
+      "!**/.wrangler",
+      "!**/.sanity",
+      "!**/.alchemy",
+      "!**/.svelte-kit",
+      "!**/wrangler.jsonc",
+      "!**/.source",
+      "!**/.react-email",
+      "!**/convex/_generated",
+      "!**/.github",
+      "!**/.agents",
+      "!**/.claude",
+      "!**/.repos"
+    ]
+  },
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next"
+  ],
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "complexity": {
+        "noBannedTypes": "off"
       },
-      {
-        "includes": ["packages/database/tables/**/index.ts"],
-        "linter": {
-          "rules": {
-            "performance": {
-              "noBarrelFile": "off"
-            }
-          }
-        }
-      }
-    ],
-    "assist": {
-      "actions": {
-        "source": {
-          "organizeImports": "on",
-          "recommended": true
-        },
-        "recommended": true
-      },
-      "enabled": true
-    },
-    "javascript": {
-      "formatter": {
-        "quoteStyle": "double"
-      }
-    },
-    "css": {
-      "parser": {
-        "tailwindDirectives": true
+      "suspicious": {
+        "noUnnecessaryConditions": "off"
       }
     }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/database/tables/**/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off"
+          }
+        }
+      }
+    }
+  ],
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "recommended": true
+      },
+      "recommended": true
+    },
+    "enabled": true
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
   }
-  
+}
